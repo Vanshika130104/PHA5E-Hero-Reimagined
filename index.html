@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pha5e Hero Reimagined</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    .custom-cursor {
+      width: 30px;
+      height: 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease-out, opacity 0.2s ease;
+      z-index: 9999;
+      opacity: 0.8;
+    }
+    .custom-cursor.hidden {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="custom-cursor" id="customCursor"></div>
+  <section class="hero d-flex align-items-center justify-content-center text-center" id="heroSection" data-speed="0.3">
+    <div class="container">
+      <h1 class="hero-title">Experience the Future</h1>
+      <p class="hero-subtitle">Dynamic. Engaging. Interactive.</p>
+      <div class="hero-images d-flex justify-content-center">
+        <div class="hero-image" data-index="1">
+          <img src="https://cdn.leonardo.ai/users/c0ccecaf-ec5c-4b07-829b-a6590ffcf9be/generations/87b3fe6f-2683-427f-a813-aace7d5e95b2/Leonardo_Phoenix_09_Create_a_series_of_vibrant_highquality_pos_2.jpg?w=512" alt="Image 1">
+        </div>
+        <div class="hero-image" data-index="2">
+          <img src="https://cdn.leonardo.ai/users/c0ccecaf-ec5c-4b07-829b-a6590ffcf9be/generations/87b3fe6f-2683-427f-a813-aace7d5e95b2/Leonardo_Phoenix_09_Create_a_series_of_vibrant_highquality_pos_1.jpg" alt="Image 2">
+        </div>
+        <div class="hero-image" data-index="3">
+          <img src="https://cdn.leonardo.ai/users/c0ccecaf-ec5c-4b07-829b-a6590ffcf9be/generations/87b3fe6f-2683-427f-a813-aace7d5e95b2/Leonardo_Phoenix_09_Create_a_series_of_vibrant_highquality_pos_3.jpg" alt="Image 3">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-5 text-center text-light" style="background: #111;">
+    <div class="container">
+      <h2>Scroll-Triggered Content</h2>
+      <p class="lead">As you scroll, watch how elements animate into view.</p>
+    </div>
+  </section>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      gsap.from(".hero-title", {
+        opacity: 0,
+        y: -50,
+        duration: 1.2,
+        ease: "power3.out"
+      });
+      gsap.from(".hero-subtitle", {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: 0.3
+      });
+      gsap.from(".hero-image img", {
+        opacity: 0,
+        scale: 0.7,
+        duration: 1.5,
+        ease: "power3.out",
+        stagger: 0.4,
+        delay: 0.5
+      });
+      gsap.to("#heroSection", {
+        scrollTrigger: {
+          trigger: "#heroSection",
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        },
+        backgroundPosition: "50% 30%",
+        ease: "none"
+      });
+    });
+
+    document.querySelectorAll(".hero-image").forEach((image) => {
+      image.addEventListener("mouseenter", (e) => {
+        gsap.to(e.target.querySelector("img"), {
+          scale: 1.2,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+        e.target.style.filter = "none";
+        document.querySelectorAll(".hero-image").forEach((other) => {
+          if (other !== e.target) {
+            gsap.to(other.querySelector("img"), {
+              opacity: 0.4,
+              filter: "blur(5px)",
+              duration: 0.5
+            });
+          }
+        });
+      });
+      
+      image.addEventListener("mouseleave", (e) => {
+        gsap.to(e.target.querySelector("img"), {
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+        document.querySelectorAll(".hero-image img").forEach((img) => {
+          gsap.to(img, {
+            opacity: 1,
+            filter: "none",
+            duration: 0.5
+          });
+        });
+      });
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      gsap.to(".hero-image:hover img", {
+        x: (e.clientX - window.innerWidth / 2) * 0.02,
+        y: (e.clientY - window.innerHeight / 2) * 0.02,
+        duration: 0.3,
+        ease: "power1.out"
+      });
+    });
+
+    const customCursor = document.getElementById("customCursor");
+
+    let hideTimeout;
+    document.addEventListener("mousemove", (e) => {
+      clearTimeout(hideTimeout);
+      customCursor.classList.remove("hidden");
+      customCursor.style.top = e.clientY + "px";
+      customCursor.style.left = e.clientX + "px";
+      hideTimeout = setTimeout(() => {
+        customCursor.classList.add("hidden");
+      }, 2000);
+    });
+
+    document.querySelectorAll(".hero-image img").forEach((img) => {
+      img.addEventListener("mouseenter", () => {
+        customCursor.style.borderColor = "#ffcc00";
+      });
+      img.addEventListener("mouseleave", () => {
+        customCursor.style.borderColor = "#fff";
+      });
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

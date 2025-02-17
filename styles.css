@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: #0c0e16;
+}
+
+.hero {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    background: #101726; 
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #ffffff;
+    background: linear-gradient(45deg, #ffcc00, #ff6600, #ffcc00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+      0 0 10px rgba(255, 255, 255, 0.6),
+      0 0 20px rgba(255, 255, 255, 0.4),
+      0 0 40px rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 10;
+    padding: 10px 20px;
+    border-radius: 10px;
+    animation: fadeIn 1.2s ease-in-out forwards, neonPulse 4s ease-in-out infinite alternate;
+    opacity: 0;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.hero-title:hover {
+    transform: scale(1.03) rotate(1deg);
+    text-shadow:
+      0 0 15px rgba(255, 255, 255, 0.7),
+      0 0 30px rgba(255, 255, 255, 0.4),
+      0 0 60px rgba(255, 255, 255, 0.2);
+}
+
+.hero-subtitle {
+    font-size: 1.7rem;
+    margin-top: 10px;
+    color: #f1f1f1;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+    animation: fadeInUp 1.2s ease-in-out 0.6s forwards;
+    transition: transform 0.3s ease, text-shadow 0.3s ease, color 0.3s ease;
+}
+
+.hero-subtitle:hover {
+    transform: translateY(-3px);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    color: #ffcc00;
+}
+
+.hero-images {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    z-index: 1;
+}
+
+<<<<<<< Tabnine <<<<<<<
+.hero-image {
+    position: relative;//-
+    overflow: hidden;//-
+    border-radius: 10px;//-
+    background: rgba(255, 255, 255, 0.05);//-
+    /* ... previous code remains the same ... *///+
+    -webkit-backdrop-filter: blur(5px); /* Add this line for Safari support *///+
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);//-
+    transition: transform 0.4s ease, box-shadow 0.4s ease;//-
+    padding: 10px;//-
+    /* ... the rest of the .hero-image styles ... *///+
+}
+>>>>>>> Tabnine >>>>>>>// {"conversationId":"e0530aaf-e3cc-4226-96e8-6ff887fd00e0","source":"instruct"}
+
+.hero-image img {
+    width: 220px;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.hero-image:hover {
+    transform: perspective(800px) rotateY(5deg) scale(1.03);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.hero-image:hover img {
+    transform: rotate(2deg) scale(1.1);
+    filter: brightness(1.2);
+}
+
+.hero-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    pointer-events: none;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+.hero-image:hover::after {
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes neonPulse {
+    0% {
+        text-shadow:
+          0 0 10px rgba(255, 255, 255, 0.6),
+          0 0 20px rgba(255, 255, 255, 0.4),
+          0 0 40px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        text-shadow:
+          0 0 15px rgba(255, 255, 255, 0.8),
+          0 0 30px rgba(255, 255, 255, 0.6),
+          0 0 60px rgba(255, 255, 255, 0.4);
+    }
+    100% {
+        text-shadow:
+          0 0 10px rgba(255, 255, 255, 0.6),
+          0 0 20px rgba(255, 255, 255, 0.4),
+          0 0 40px rgba(255, 255, 255, 0.2);
+    }
+}
